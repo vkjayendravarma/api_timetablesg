@@ -26,6 +26,8 @@ mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
 
 var subjectsRouter = require('./routes/api/subjects')
 var facultyRouter = require('./routes/api/faculty')
+var classRouter = require('./routes/api/class')
+var labsRouter = require('./routes/api/labs')
 var app = express();
 
 // view engine setup
@@ -48,6 +50,8 @@ app.use(bodyParser.json())
 
 app.use('/api/subjects', subjectsRouter)
 app.use('/api/faculty', facultyRouter)
+app.use('/api/classes', classRouter)
+app.use('/api/labs', labsRouter)
 
 
 

@@ -9,7 +9,7 @@ const Subject = require('../../models/Subject')
 // @access: PUBLIC
 
 router.get('/', (req, res) => {
-    Subject.find().then(subject => {
+    Subject.find().populate('faculty', ['employeeID','name', 'shortname']).then(subject => {
         if(subject){
             res.status(200).json({
                 success:true,

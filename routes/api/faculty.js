@@ -73,10 +73,14 @@ router.post("/update/faculty/new/subject/:employeeID", (req, res) => {
                 else{
                     faculty.subjectsDealing.push(subject.id)
                     faculty.save().then((faculty) => {
-                        res.status(200).json({
-                            success: true,
-                            result: faculty
-                        })
+                        subject.faculty.push(faculty.id)
+                        subject.save().then(() => {
+                            res.status(200).json({
+                                success: true,
+                                result: faculty
+                            })
+                        }).catch(err => console.log('err on adding faculty to subject ' +err))
+                       
                     }).catch(err => console.log('err on adding new subject to faculty ' + err))
                 }
             }else{

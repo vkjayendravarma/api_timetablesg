@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const FacultySchema = new Schema({
-    employeeID:{
+    employeeID: {
         type: String,
         required: true
     },
@@ -18,90 +18,73 @@ const FacultySchema = new Schema({
         type: String,
         required: true
     },
-    subjectsDealing:[
-        {
-            type: Schema.Types.ObjectId,
-            ref: "mySubject"
-        }
-    ],
-    timeTable:{
-        mon:{
-            sessions:[
-                {
-                    type: Schema.Types.ObjectId,
-                    ref: "myClass"  
-                }
-            ],
-            dayHrs:{
+    subjectsDealing: [{
+        type: Schema.Types.ObjectId,
+        ref: "mySubject"
+    }],
+    hours: {
+        type: Number,
+        default: 0
+    },
+    timeTable: {
+        mon: [{
+            session: {
                 type: Number,
-                default: 0
+            },
+            class: {
+                type: Schema.Types.ObjectId,
+                    ref: "myClass"
             }
-        },
-        tue:{
-            sessions:[
-                {
-                    type: Schema.Types.ObjectId,
-                    ref: "myClass"  
-                }
-            ],
-            dayHrs:{
+        }],
+        tue: [{
+            session: {
                 type: Number,
-                default: 0
+            },
+            class: {
+                type: Schema.Types.ObjectId,
+                    ref: "myClass"
             }
-        },
-        wed:{
-            sessions:[
-                {
-                    type: Schema.Types.ObjectId,
-                    ref: "myClass"  
-                }
-            ],
-            dayHrs:{
-                type: Number,
-                default: 0
-            }
-        },
-        thu:{
-            sessions:[
-                {
-                    type: Schema.Types.ObjectId,
-                    ref: "myClass"  
-                }
-            ],
-            dayHrs:{
-                type: Number,
-                default: 0
-            }
-        },
-        fri:{
-            sessions:[
-                {
-                    type: Schema.Types.ObjectId,
-                    ref: "myClass"  
-                }
-            ],
-            dayHrs:{
-                type: Number,
-                default: 0
-            }
-        },
-        sat:{
-            sessions:[
-                {
-                    type: Schema.Types.ObjectId,
-                    ref: "myClass"  
-                }
-            ],
-            dayHrs:{
-                type: Number,
-                default: 0
-            }
-        },
+        }],
 
-        totalHrs:{
-            type: Number,
-            default: 0,
-        }
+        wed: [{
+            session: {
+                type: Number,
+            },
+            class: {
+                type: Schema.Types.ObjectId,
+                    ref: "myClass"
+            }
+        }],
+
+        thu: [{
+            session: {
+                type: Number,
+            },
+            class: {
+                type: Schema.Types.ObjectId,
+                    ref: "myClass"
+            }
+        }],
+
+        fri: [{
+            session: {
+                type: Number,
+            },
+            class: {
+                type: Schema.Types.ObjectId,
+                    ref: "myClass"
+            }
+        }],
+
+        sat: [{
+            session: {
+                type: Number,
+            },
+            class: {
+                type: Schema.Types.ObjectId,
+                    ref: "myClass"
+            }
+        }]
     }
 })
 

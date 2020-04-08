@@ -6,105 +6,116 @@ const ClassSchema = new Schema({
         type: String,
         required: true
     },
-    section:{
+    section: {
         type: String,
         required: true,
     },
-    roomno:{
+    roomno: {
         type: String,
+        required: true,
     },
     timeTable: {
-        mon: [
-            {
-                subject: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'mySubject'
-                },
-                faculty: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'myFaculty'
-                },
-                sessionType: {
-                    type: String
-                }
+        mon: [{
+            session: {
+                type: Number,               
+            },
+            subject: {
+                type: Schema.Types.ObjectId,
+                ref: 'mySubject'
+            },
+            faculty: {
+                type: Schema.Types.ObjectId,
+                ref: 'myFaculty'
+            },
+            sessionType: {
+                type: String
+            },
+            labNo: {
+                type: Schema.Types.ObjectId,
+                ref: 'myLab'
             }
-        ],
-        tue: [
-            {
-                subject: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'mySubject'
-                },
-                faculty: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'myFaculty'
-                },
-                sessionType: {
-                    type: String
-                }
+        }],
+        tue: [{
+            session: {
+                type: Number,
+            },
+            subject: {
+                type: Schema.Types.ObjectId,
+                ref: 'mySubject'
+            },
+            faculty: {
+                type: Schema.Types.ObjectId,
+                ref: 'myFaculty'
+            },
+            sessionType: {
+                type: String
             }
-        ],
-        wed: [
-            {
-                subject: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'mySubject'
-                },
-                faculty: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'myFaculty'
-                },
-                sessionType: {
-                    type: String
-                }
+        }],
+        wed: [{
+            session: {
+                type: Number,
+            },
+            subject: {
+                type: Schema.Types.ObjectId,
+                ref: 'mySubject'
+            },
+            faculty: {
+                type: Schema.Types.ObjectId,
+                ref: 'myFaculty'
+            },
+            sessionType: {
+                type: String
             }
-        ],
-        thu: [
-            {
-                subject: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'mySubject'
-                },
-                faculty: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'myFaculty'
-                },
-                sessionType: {
-                    type: String
-                }
+        }],
+        thu: [{
+            session: {
+                type: Number,
+            },
+            subject: {
+                type: Schema.Types.ObjectId,
+                ref: 'mySubject'
+            },
+            faculty: {
+                type: Schema.Types.ObjectId,
+                ref: 'myFaculty'
+            },
+            sessionType: {
+                type: String
             }
-        ],
-        fri: [
-            {
-                subject: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'mySubject'
-                },
-                faculty: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'myFaculty'
-                },
-                sessionType: {
-                    type: String
-                }
+        }],
+        fri: [{
+            session: {
+                type: Number,
+            },
+            subject: {
+                type: Schema.Types.ObjectId,
+                ref: 'mySubject'
+            },
+            faculty: {
+                type: Schema.Types.ObjectId,
+                ref: 'myFaculty'
+            },
+            sessionType: {
+                type: String
             }
-        ],
-        sat: [
-            {
-                subject: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'mySubject'
-                },
-                faculty: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'myFaculty'
-                },
-                sessionType: {
-                    type: String
-                }
+        }],
+        sat: [{
+            session: {
+                type: Number,
+            },
+            subject: {
+                type: Schema.Types.ObjectId,
+                ref: 'mySubject'
+            },
+            faculty: {
+                type: Schema.Types.ObjectId,
+                ref: 'myFaculty'
+            },
+            sessionType: {
+                type: String
             }
-        ],
+        }],
     }
 })
 
-module.exports = Class = mongoose.model('myClass', ClassSchema)
+module.exports = Class = mongoose.model('myClass', ClassSchema, 'Classes')
