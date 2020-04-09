@@ -22,10 +22,10 @@ const FacultySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "mySubject"
     }],
-    hours: {
-        type: Number,
-        default: 0
-    },
+    // hours: {
+    //     type: Number,
+    //     default: 0
+    // },
     timeTable: {
         mon: [{
             session: {
