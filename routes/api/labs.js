@@ -9,7 +9,14 @@ const Lab = require('../../models/Lab')
 // @desc: get all classe
 // @access: PUBLIC
 router.get('/', (req, res) => {
-    res.send(" Labs working")
+   Lab.find().populate().then((lab) => {
+       res.status(200).json({
+           success: true,
+           res: lab
+       })
+   }).catch(err => {
+       console.log('err' + err)
+   })
 })
 
 // @type : POST

@@ -49,6 +49,9 @@ const ClassSchema = new Schema({
             },
             sessionType: {
                 type: String
+            },labNo: {
+                type: Schema.Types.ObjectId,
+                ref: 'myLab'
             }
         }],
         wed: [{
@@ -65,6 +68,9 @@ const ClassSchema = new Schema({
             },
             sessionType: {
                 type: String
+            },labNo: {
+                type: Schema.Types.ObjectId,
+                ref: 'myLab'
             }
         }],
         thu: [{
@@ -81,7 +87,11 @@ const ClassSchema = new Schema({
             },
             sessionType: {
                 type: String
+            },labNo: {
+                type: Schema.Types.ObjectId,
+                ref: 'myLab'
             }
+        
         }],
         fri: [{
             session: {
@@ -97,6 +107,9 @@ const ClassSchema = new Schema({
             },
             sessionType: {
                 type: String
+            },labNo: {
+                type: Schema.Types.ObjectId,
+                ref: 'myLab'
             }
         }],
         sat: [{
@@ -113,6 +126,9 @@ const ClassSchema = new Schema({
             },
             sessionType: {
                 type: String
+            },labNo: {
+                type: Schema.Types.ObjectId,
+                ref: 'myLab'
             }
         }],
     }

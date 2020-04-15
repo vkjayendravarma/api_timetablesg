@@ -90,10 +90,13 @@ router.post('/update/class/timetable/', (req, res) => {
             //if faculty available
             Class.findById(newSession.classId).then((myClass) => { //get class by classId
 
-                if (myClass.timeTable[newSession.day] == undefined) {
+                
+
+
+                if (myClass.timeTable[newSession.day] == undefined || myClass.timeTable[newSession.day] == null) {
                     myClass.timeTable[newSession.day] = []
                 }
-                if (faculty.timeTable[newSession.day] == undefined) {
+                if (faculty.timeTable[newSession.day] == undefined || faculty.timeTable[newSession.day] == null) {
                     faculty.timeTable[newSession.day] = []
                 }
                 classExists = myClass.timeTable[newSession.day].filter(hour => parseInt(hour.session) == parseInt(newSession.session))
@@ -172,7 +175,7 @@ router.post('/update/class/timetable/', (req, res) => {
 
                                 }
 
-                                lab.schedule[newSession.day].mngOReng = myClass.id
+                                lab.schedule[newSession.day][mngOReng] = myClass.id
 
                                 faculty.save().then(() => {
                                     myClass.save().then((classu) => {
@@ -251,12 +254,34 @@ router.delete('/delete/class/timetable/session', (req, res) => {
                 toDelete = toDelete[0]
                 
                 Faculty.findById(toDelete.faculty).then((faculty)=> {
-                    
+                    let updatedClass = []
+                    let updatedFaculty = []
                     if (toDelete.sessionType == 'lab') {
+                        labSession = 'evng'
+                        if(sessionToDelete.session < 4)
+                            labSession = 'mng'                       
+
+                        delClass.timeTable[sessionToDelete.day].forEach(hr => {
+                            if(parseInt(hr.session) == parseInt(sessionToDelete.session)){
+                                labId = hr.labNo
+                                return
+                            }
+                            if( parseInt(hr.session) == (parseInt(sessionToDelete.session) + 1) || parseInt(hr.session) == (parseInt(sessionToDelete.session) + 2))
+                                return
+                            updatedClass.push(hr)
+                        });
                         
-                        // fix this shit asshole 
-                        updatedClass = delClass.timeTable[sessionToDelete.day].filter(hr => { return parseInt(hr.session) !== parseInt(sessionToDelete.session) || parseInt(hr.session) !== (parseInt(sessionToDelete.session) + 1) || parseInt(hr.session) !== (parseInt(sessionToDelete.session) + 2)})
-                        updatedFaculty = faculty.timeTable[sessionToDelete.day].filter(hr => { return parseInt(hr.session) !== parseInt(sessionToDelete.session) || parseInt(hr.session) !== (parseInt(sessionToDelete.session) + 1) || parseInt(hr.session) !== (parseInt(sessionToDelete.session) + 2)}) 
+                        faculty.timeTable[sessionToDelete.day].forEach(hr => {
+                            if(parseInt(hr.session) == parseInt(sessionToDelete.session) || parseInt(hr.session) == (parseInt(sessionToDelete.session) + 1) || parseInt(hr.session) == (parseInt(sessionToDelete.session) + 2))
+                                return
+                            updatedFaculty.push(hr)
+                        });
+                        Lab.findById(labId).then(lab => {
+                            if(lab){
+                                lab.schedule[sessionToDelete.day][labSession] = null
+                                lab.save().then().catch(err => console.log('err in updating lab schedule ' + err))
+                            }
+                        }).catch(err => console.log('err in deleting in lab ' +err))
                     } else {
                         updatedClass = delClass.timeTable[sessionToDelete.day].filter(hr => { return parseInt(hr.session) !== parseInt(sessionToDelete.session)})
                         updatedFaculty = faculty.timeTable[sessionToDelete.day].filter(hr => { return parseInt(hr.session) !== parseInt(sessionToDelete.session)})
